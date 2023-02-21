@@ -37,7 +37,7 @@ public class JpaMain {
 			System.out.println("findMember.Name = " + findMember.getName());
 			
 			// 3) 수정
-			// 자바 컬렉션과 같은 개념으로 setName으로 데이터를 변경하면 JPA에서 커밋 시점 전에 체크하고 DB에 업데이트 쿼리를 날림. 개쩐다.
+			// 자바 컬렉션과 같은 개념으로 setName으로 데이터를 변경하면 JPA에서 커밋 시점 전에 체크하고 DB에 업데이트 쿼리를 날림.
 			findMember.setName("HelloJPA"); 
 			
 			// JPQL를 사용하여 Custom query test
