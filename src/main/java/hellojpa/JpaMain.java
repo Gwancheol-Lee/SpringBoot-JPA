@@ -1,9 +1,12 @@
 package hellojpa;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.swing.text.html.HTMLDocument.Iterator;
 
 public class JpaMain {
 
@@ -29,13 +32,25 @@ public class JpaMain {
 			*/
 			
 			// 2) 조회
-			Member findMember = em.find(Member.class, 1L); // EntityClass 와 PK ID로 Member 조회
+			Member findMember = em.find(Member.class, 1L); // EntityClass, PK ID로 Member 조회
 			System.out.println("findMember.id = " + findMember.getId());
 			System.out.println("findMember.Name = " + findMember.getName());
 			
 			// 3) 수정
 			// 자바 컬렉션과 같은 개념으로 setName으로 데이터를 변경하면 JPA에서 커밋 시점 전에 체크하고 DB에 업데이트 쿼리를 날림. 개쩐다.
 			findMember.setName("HelloJPA"); 
+			
+			// JPQL를 사용하여 Custom query test
+			// 객체를 대상으로 하는 객체지향 쿼리이므로 쿼리문의 Member는 테이블 Member가 아닌 엔티티 객체 Member를 가르키고 있다.
+			// JPA에서 해당 객체 쿼리를 설정한 RDBMS의 방언에 맞춰서 대신 작성해준다.
+			List<Member> result = em.createQuery("select m from Member as m", Member.class) // 쿼리, EntityClass로 Member 조회
+					.setFirstResult(1) // offset
+					.setMaxResults(5) // limit 
+					.getResultList(); 
+			
+			for (Member member : result) {
+				System.out.println("member.name= " + member.getName());
+			}
 			
 			tx.commit(); // SQL 실행 코드 이후에 트랜잭션 commit
 		} catch (Exception e) {
