@@ -42,7 +42,7 @@ public class JpaMain {
 			
 			// JPQL를 사용하여 Custom query test
 			// 객체를 대상으로 하는 객체지향 쿼리이므로 쿼리문의 Member는 테이블 Member가 아닌 엔티티 객체 Member를 가르키고 있다.
-			// JPA에서 해당 객체 쿼리를 설정한 RDBMS의 방언에 맞춰서 대신 작성해준다.
+			// JPA에서 해당 객체 쿼리를 설정한 RDBMS의 방언에 맞춰서 대신 작성해준다. JPQL은 실행시 기본적으로 EntityManager.flush()를 실행하도록 설계되어있음.
 			List<Member> result = em.createQuery("select m from Member as m", Member.class) // 쿼리, EntityClass로 Member 조회
 					.setFirstResult(1) // offset
 					.setMaxResults(5) // limit 
@@ -51,7 +51,8 @@ public class JpaMain {
 			for (Member member : result) {
 				System.out.println("member.name= " + member.getName());
 			}
-			
+			em.clear(); // 현재 시점에 영속성 컨텍스트에 담긴 엔티티 객체를 모두 삭제
+			em.flush(); // 현재 시점에 영속성 컨텍스트의 쓰기 지연 SQL 저장소에 저장 되어있는 SQL 쿼리를 실행함
 			tx.commit(); // SQL 실행 코드 이후에 트랜잭션 commit
 		} catch (Exception e) {
 			tx.rollback(); // 오류 발생시 트랜잭션 롤백
