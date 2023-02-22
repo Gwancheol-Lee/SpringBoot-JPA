@@ -15,7 +15,8 @@
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.use_sql_comments" value="true" />
-			<!--<property name="hibernate.hbm2ddl.auto" value="create" />-->
+			<!-- 데이터베이스 스키마 자동 생성. @Entity 어노테이션 테이블들 자동 생성 (개발단계에서만 사용할 것)-->
+			<property name="hibernate.hbm2ddl.auto" value="create" />
 		</properties>
 	</persistence-unit>
 </persistence>
