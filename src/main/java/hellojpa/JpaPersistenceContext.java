@@ -20,8 +20,10 @@ public class JpaPersistenceContext {
 			
 			// 비영속 상태 (Entity 객체 선언만 하고 EntityManager 관련 액션은 없는 상태)
 			Member member = new Member();
-			member.setId(3L);
+			member.setId(101L);
 			member.setName("HelloJPA");
+			
+			em.find(Member.class, 101L); 
 			
 			// 영속 상태 (Entity 객체를 EntityManager에 저장하면서 영속성 컨텍스트(Persistence Context)에 의해 관리가 된다. 현재 시점 DB 저장x )
 			em.persist(member);

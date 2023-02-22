@@ -51,6 +51,7 @@ public class JpaMain {
 			for (Member member : result) {
 				System.out.println("member.name= " + member.getName());
 			}
+			
 			em.clear(); // 현재 시점에 영속성 컨텍스트에 담긴 엔티티 객체를 모두 삭제
 			em.flush(); // 현재 시점에 영속성 컨텍스트의 쓰기 지연 SQL 저장소에 저장 되어있는 SQL 쿼리를 실행함
 			tx.commit(); // SQL 실행 코드 이후에 트랜잭션 commit
