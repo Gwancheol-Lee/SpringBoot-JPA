@@ -7,21 +7,52 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
+@SequenceGenerator(name = "member_seq_generator", sequenceName = "member_seq")
 public class Member {
 	
+	/*
+	 * IDENTITY: 키본 키 생성을 DB에 위임 (AUTO_INCREMENT) 
+	 * SEQUENCE: PRIMARY KEY로 생성. UNIQUE한 값.
+	 */
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_seq_generator")
 	private Long id;
 	
 	@Column(name = "username", length = 10, nullable = false) // DB 컬럼 매핑 
 	private String name;
+
+	public Member() {
+	}
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
+	
+	/*
 	private int age;
 	
 	@Enumerated(EnumType.STRING) // enum 타입 매핑. ORDINARY 사용X. ORDINARY: enum 순서를 DB에 저장. STRING: enum 이름을 DB에 저장
@@ -35,6 +66,7 @@ public class Member {
 	
 	@Lob // BLOB(Boolean), CLOB(String) 매칭
 	private String description;
+	
 	
 	@Transient // DB에 생성 및 매핑 하지 않음. 캐시 메모리에만 저장해서 사용하고자 할 때 사용
 	private int temp;
@@ -59,4 +91,5 @@ public class Member {
 	public void setName(String name) {
 		this.name = name;
 	}
+	*/
 }
