@@ -17,7 +17,11 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
-@SequenceGenerator(name = "member_seq_generator", sequenceName = "member_seq")
+@SequenceGenerator(
+		name = "MEMBER_SEQ_GENERATOR", 
+		sequenceName = "MEMBER_SEQ",
+		initialValue = 1, // 시퀀스 DDL 사용시 처음 시작하는 값
+		allocationSize = 50) // 시퀀스 한 번 호출에 증가하는 수
 public class Member {
 	
 	/*
@@ -25,7 +29,7 @@ public class Member {
 	 * SEQUENCE: PRIMARY KEY로 생성. UNIQUE한 값.
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_seq_generator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MEMBER_SEQ_GENERATOR")
 	private Long id;
 	
 	@Column(name = "username", length = 10, nullable = false) // DB 컬럼 매핑 
