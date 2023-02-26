@@ -20,11 +20,11 @@ public class JpaPersistenceContext {
 			
 			// 비영속 상태 (Entity 객체 선언만 하고 EntityManager 관련 액션은 없는 상태)
 			Member member1 = new Member();
-			member1.setName("A");
+			member1.setUsername("A");
 			Member member2 = new Member();
-			member2.setName("B");
+			member2.setUsername("B");
 			Member member3 = new Member();
-			member3.setName("C");
+			member3.setUsername("C");
 			
 //			em.find(Member.class, 101L); 
 			

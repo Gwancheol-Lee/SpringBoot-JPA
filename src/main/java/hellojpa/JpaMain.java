@@ -34,11 +34,11 @@ public class JpaMain {
 			// 2) 조회
 			Member findMember = em.find(Member.class, 1L); // EntityClass, PK ID로 Member 조회
 			System.out.println("findMember.id = " + findMember.getId());
-			System.out.println("findMember.Name = " + findMember.getName());
+			System.out.println("findMember.Name = " + findMember.getUsername());
 			
 			// 3) 수정
 			// 자바 컬렉션과 같은 개념으로 setName으로 데이터를 변경하면 JPA에서 커밋 시점 전에 체크하고 DB에 업데이트 쿼리를 날림.
-			findMember.setName("HelloJPA"); 
+			findMember.setUsername("HelloJPA"); 
 			
 			// JPQL를 사용하여 Custom query test
 			// 객체를 대상으로 하는 객체지향 쿼리이므로 쿼리문의 Member는 테이블 Member가 아닌 엔티티 객체 Member를 가르키고 있다.
@@ -49,7 +49,7 @@ public class JpaMain {
 					.getResultList(); 
 			
 			for (Member member : result) {
-				System.out.println("member.name= " + member.getName());
+				System.out.println("member.name= " + member.getUsername());
 			}
 			
 			em.clear(); // 현재 시점에 영속성 컨텍스트에 담긴 엔티티 객체를 모두 삭제
