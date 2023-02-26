@@ -58,8 +58,9 @@ public class Member {
 		return team;
 	}
 
-	public void setTeam(Team team) {
+	public void changeTeam(Team team) { // 다른 비지니스 로직이 들어가는 경우 set말고 다른 메서드 명으로 변경해서 사용하는 것을 권장
 		this.team = team;
+		team.getMembers().add(this); // Team 객체의 Members도 세팅
 	}
 	
 	/*
