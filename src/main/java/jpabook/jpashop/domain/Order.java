@@ -8,6 +8,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,10 +19,13 @@ public class Order {
 	@Id @GeneratedValue
 	@Column(name = "ORDER_ID")
 	private Long id;
-	@Column(name = "MEMBER_ID")
-	private Long memberId;
+	
+	@ManyToOne
+	@JoinColumn(name = "MEMBER_ID")
 	private Member member;
+	
 	private LocalDateTime orderDate;
+	
 	@Enumerated(EnumType.STRING)
 	private OrderStatus orderStatus;
 	
@@ -29,12 +34,6 @@ public class Order {
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	public Long getMemberId() {
-		return memberId;
-	}
-	public void setMemberId(Long memberId) {
-		this.memberId = memberId;
 	}
 	public Member getMember() {
 		return member;

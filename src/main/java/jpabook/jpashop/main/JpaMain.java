@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import javax.swing.text.html.HTMLDocument.Iterator;
 
 import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.OrderItem;
 
 public class JpaMain {
 
@@ -21,7 +22,11 @@ public class JpaMain {
 			tx.begin();
 			
 			Order order = em.find(Order.class, 1L);
-			Long memberId = order.getMemberId();
+			em.persist(order);
+			
+			OrderItem orderItem = new OrderItem();
+			orderItem.setOrder(order);
+			em.persist(orderItem);
 			
 			tx.commit();
 		} catch (Exception e) {
