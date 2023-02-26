@@ -28,10 +28,19 @@ public class JpaAssociationMapping {
 			member.setTeam(team);
 			em.persist(member);
 			
+			em.flush();
+			em.clear();
+			
 			Member findMember = em.find(Member.class, member.getId());
 			
+			// 단방향 매핑 ( Member 객체에서 Team 객체를 참조. ManyToOne )
 			Team findTeam = findMember.getTeam();
-			System.out.println("findTeam = " + findTeam.getName());
+			// 양방향 매핑 ( Member 객체 Team 객체 참조 + Team 객체에서 Member 객체 List Collection으로 참조. ManyToOne + OneToMany )
+			List<Member> members = findMember.getTeam().getMembers();
+			for (Member m : members) {
+				System.out.println("m = " + m.getUsername());
+				
+			}
 			
 			tx.commit();
 		} catch (Exception e) {
