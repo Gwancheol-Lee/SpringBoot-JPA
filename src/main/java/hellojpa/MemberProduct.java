@@ -7,23 +7,28 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Product {
+public class MemberProduct {
 	
 	@Id @GeneratedValue()
-	@Column(name = "PRODUCT_ID")
 	private Long id;
 	
 	private String name;
 	
-	@OneToMany(mappedBy = "member")
-	private List<MemberProduct> memberProducts = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name = "MEMBER_ID")
+	private Member member;
+
+	@ManyToOne
+	@JoinColumn(name = "PRODUCT_ID")
+	private Product product;
 	
-	public Product() {
+	public MemberProduct() {
 	}
 
 	public Long getId() {
