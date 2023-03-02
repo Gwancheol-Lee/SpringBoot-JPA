@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -32,8 +33,12 @@ public class Member {
 //	private Long teamId;
 	
 	@ManyToOne // Member 입장에선 Many, Team이 One
-	@JoinColumn(name = "TEAM_ID") // 조인하는 컬럼명 선언
+	@JoinColumn(name = "TEAM_ID", insertable = false, updatable = false) // 조인하는 컬럼명 선언
 	private Team team;
+	
+	@OneToOne
+	@JoinColumn(name = "LOCKER_ID")
+	private Locker locker;
 	
 	public Member() {
 	}
