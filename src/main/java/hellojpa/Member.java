@@ -47,7 +47,7 @@ public class Member {
 	private Locker locker;
 	
 	@OneToMany(mappedBy = "member")
-	private List<MemberProduct> memberProducts = new ArrayList<>();
+	private List<Order> memberProducts = new ArrayList<>();
 	
 	public Member() {
 	}
