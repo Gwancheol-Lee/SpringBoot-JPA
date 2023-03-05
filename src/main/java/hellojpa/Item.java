@@ -17,9 +17,8 @@ import javax.persistence.InheritanceType;
  * @DiscriminatorColumn(name="DTYPE") : 부모 엔티티 클래스에 선언. 부모 테이블에 저장되는 데이터가 어떤 자식 테이블 관련 데이터인지 구분하는 컬럼 추가. Default 컬럼명 DTYPE
  * @DiscriminatorValue("XXX") : 자식 엔티티 클래스에 선언. 저장되는 DTYPE의 Value값을 지정. Default값은 해당 자식 테이블명
  */
-@Inheritance(strategy = InheritanceType.JOINED)
-// 조인 엔티티 클래스명이 입력됨. Default 컬럼명=DTYPE
-@DiscriminatorColumn
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn // 단일 테이블 전략에는 DTYPE이 필수로 추가됨.
 public class Item {
 	
 	@Id @GeneratedValue()
