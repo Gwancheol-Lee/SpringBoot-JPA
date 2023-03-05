@@ -1,11 +1,11 @@
 package hellojpa;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+//부모 테이블에 저장되는 DTYPE 데이터명을 지정. 기본값은 엔티티 클래스명
+@DiscriminatorValue("M")
 public class Movie extends Item {
 	
 	private String director;
